@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7668F5DA-9A60-4BB3-9AD4-1A2F8BF70D1B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Cloud Alarm</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8E9A8BBB4398A6E745CB171300DD9852615777E6</key>
+		<string>https://github.com/mpolednik/Cloud-Alarm</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Cloud Alarm.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8E9A8BBB4398A6E745CB171300DD9852615777E6</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mpolednik/Cloud-Alarm</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8E9A8BBB4398A6E745CB171300DD9852615777E6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8E9A8BBB4398A6E745CB171300DD9852615777E6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Cloud-Alarm</string>
+		</dict>
+	</array>
+</dict>
+</plist>
