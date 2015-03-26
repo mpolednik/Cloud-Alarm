@@ -10,12 +10,11 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AlarmsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var items = ["apple", "neapple", "abc"]
-
     @IBOutlet weak var tableView: UITableView!
-    
+    var alarms: AlarmContainer? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,29 +23,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         manager.request(.GET, "http://private-06e74-cloudalarm.apiary-mock.com/alarms").responseJSON() {
             (request, response, JSON , error) in
             if let JSON: AnyObject = JSON {
-                let alarms =  Mapper<AlarmContainer>().map(JSON as [String : AnyObject])
-
-                if let alarms = alarms.alarms {
-                    for alarm in alarms {
-                        println(alarm.id)
-                        println(alarm.title)
-                        println(alarm.hour)
-                        println(alarm.minute)
-                        println(alarm.enabled)
-                        println(alarm.days)
-                    }
-                }
+                self.alarms =  Mapper<AlarmContainer>().map(JSON as [String : AnyObject])
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showAlarmDetail" {
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                let object = self.alarms!.alarms![indexPath.row]
+                (segue.destinationViewController as AlarmViewController).alarm = object
             }
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        if let alarms = self.alarms {
+            return alarms.alarms!.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AlarmCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel!.text = self.items[indexPath.row]
+        cell.textLabel!.text = self.alarms!.alarms![indexPath.row].title
         return cell
     }
     
