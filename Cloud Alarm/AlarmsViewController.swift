@@ -49,7 +49,7 @@ class AlarmsViewController: UIViewController, UITableViewDataSource, UITableView
       //  let cell = tableView.dequeueReusableCellWithIdentifier("AlarmCell", forIndexPath: indexPath) as UITableViewCell
        // cell.textLabel!.text = self.alarms!.alarms![indexPath.row].title
         let cell: AlarmsTableViewCell = tableView.dequeueReusableCellWithIdentifier("AlarmCell",  forIndexPath: indexPath) as AlarmsTableViewCell
-        cell.setCell(self.alarms!.alarms![indexPath.row].title!)
+        cell.setCell(self.alarms!.alarms![indexPath.row].title!,hours: String(self.alarms!.alarms![indexPath.row].hour!),minutes: String(self.alarms!.alarms![indexPath.row].minute!))
         return cell
     }
     

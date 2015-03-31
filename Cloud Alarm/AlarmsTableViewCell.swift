@@ -13,14 +13,9 @@ class AlarmsTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var leftLabelText: UILabel!
+    @IBOutlet weak var hoursLabel: UILabel!
+    @IBOutlet weak var minutesLabel: UILabel!
     
-    /*init(Style: UITableViewCellStyle, reuseIdentifier: String) {
-        super.init(style: Style, reuseIdentifier: reuseIdentifier)
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }*/
     
     override func awakeFromNib() {
          super.awakeFromNib()
@@ -30,8 +25,10 @@ class AlarmsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setCell(leftLabelText: String){
+    func setCell(leftLabelText: String, hours: String, minutes: String){
         self.leftLabelText.text = leftLabelText
+        self.hoursLabel.text = hours
+        self.minutesLabel.text = minutes
         
     }
 }
