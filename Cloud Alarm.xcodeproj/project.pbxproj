@@ -16,6 +16,7 @@
 		1FCB72751AC43DE2009F7BBF /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCB72741AC43DE2009F7BBF /* AlarmViewController.swift */; };
 		1FCF6A9A1ABB0D21008A4FDA /* AlarmContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF6A991ABB0D21008A4FDA /* AlarmContainer.swift */; };
 		1FFC80FD1ABB08160002E38D /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC80FC1ABB08160002E38D /* Alarm.swift */; };
+		717CF7FC1ACABBC90010504C /* AlarmsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717CF7FB1ACABBC90010504C /* AlarmsTableViewCell.swift */; };
 		8D833A14F25AB8EA76D355FA /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A32FBF0466AD2B26FB7CC16 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		309D562AFD80630F331F2267 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4A32FBF0466AD2B26FB7CC16 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		548D21D1A915B60858192DC6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		717CF7FB1ACABBC90010504C /* AlarmsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				1FCB72741AC43DE2009F7BBF /* AlarmViewController.swift */,
 				1FCF6A991ABB0D21008A4FDA /* AlarmContainer.swift */,
 				1F2004751AB2D53C00D28B9A /* Main.storyboard */,
+				717CF7FB1ACABBC90010504C /* AlarmsTableViewCell.swift */,
 				1F2004781AB2D53C00D28B9A /* Images.xcassets */,
 				1F20047A1AB2D53C00D28B9A /* LaunchScreen.xib */,
 				1F20046F1AB2D53C00D28B9A /* Supporting Files */,
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FCB72751AC43DE2009F7BBF /* AlarmViewController.swift in Sources */,
+				717CF7FC1ACABBC90010504C /* AlarmsTableViewCell.swift in Sources */,
 				1F2004741AB2D53C00D28B9A /* AlarmsViewController.swift in Sources */,
 				1F2004721AB2D53C00D28B9A /* AppDelegate.swift in Sources */,
 				1FFC80FD1ABB08160002E38D /* Alarm.swift in Sources */,

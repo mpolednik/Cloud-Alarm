@@ -45,10 +45,11 @@ class AlarmsViewController: UIViewController, UITableViewDataSource, UITableView
             return 0
         }
     }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AlarmCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel!.text = self.alarms!.alarms![indexPath.row].title
+   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+      //  let cell = tableView.dequeueReusableCellWithIdentifier("AlarmCell", forIndexPath: indexPath) as UITableViewCell
+       // cell.textLabel!.text = self.alarms!.alarms![indexPath.row].title
+        let cell: AlarmsTableViewCell = tableView.dequeueReusableCellWithIdentifier("AlarmCell",  forIndexPath: indexPath) as AlarmsTableViewCell
+        cell.setCell(self.alarms!.alarms![indexPath.row].title!)
         return cell
     }
     
