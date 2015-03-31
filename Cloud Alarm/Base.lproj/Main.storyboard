@@ -84,7 +84,7 @@
             </objects>
             <point key="canvasLocation" x="694" y="406"/>
         </scene>
-        <!--Alarm View Controller-->
+        <!--Alarm detail-->
         <scene sceneID="yTg-Jm-KX0">
             <objects>
                 <tableViewController id="Nu8-fX-Yej" customClass="AlarmViewController" customModule="Cloud_Alarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -105,7 +105,7 @@
                             <outlet property="delegate" destination="Nu8-fX-Yej" id="Mg5-Zx-Fsq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="XVe-Ap-NeL"/>
+                    <navigationItem key="navigationItem" title="Alarm detail" id="OIN-vm-qpB"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RuV-s2-MfK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
