@@ -10,9 +10,11 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
-class AlarmAddEditViewController: UITableViewController {
+class AlarmAddEditViewController: UIViewController {
     
     var alarm: Alarm? = nil
+    
+    @IBOutlet weak var tableView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

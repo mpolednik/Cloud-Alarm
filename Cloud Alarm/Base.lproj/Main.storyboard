@@ -56,7 +56,7 @@
                                             <outlet property="hoursLabel" destination="ZsW-kL-N1q" id="qyn-Rv-1Xk"/>
                                             <outlet property="leftLabelText" destination="e9k-yg-I0j" id="i6h-9N-RoM"/>
                                             <outlet property="minutesLabel" destination="QCC-vw-09Z" id="FPE-fA-DWO"/>
-                                            <segue destination="KwR-MM-LUF" kind="push" identifier="showEditAlarm" id="gth-hC-Ovk"/>
+                                            <segue destination="Zrh-0E-Oyn" kind="push" identifier="showEditAlarm" id="V7v-BE-D9v"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -71,7 +71,7 @@
                     <navigationItem key="navigationItem" title="Alarms" id="E1I-Yx-FXf">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="d4u-5r-49m">
                             <connections>
-                                <segue destination="KwR-MM-LUF" kind="push" identifier="showAddAlarm" id="1S2-sI-u5r"/>
+                                <segue destination="Zrh-0E-Oyn" kind="push" identifier="showAddAlarm" id="3eT-ty-4Mf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -84,26 +84,53 @@
             <point key="canvasLocation" x="694" y="406"/>
         </scene>
         <!--Alarm Add Edit View Controller-->
-        <scene sceneID="T3M-be-egh">
+        <scene sceneID="sPm-2Z-Adb">
             <objects>
-                <tableViewController id="KwR-MM-LUF" customClass="AlarmAddEditViewController" customModule="Cloud_Alarm" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vgS-wA-kGc">
+                <viewController id="Zrh-0E-Oyn" customClass="AlarmAddEditViewController" customModule="Cloud_Alarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8SP-OF-OHP"/>
+                        <viewControllerLayoutGuide type="bottom" id="Osn-QN-Yvz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kiB-jc-HB6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Z5G-FA-N1C">
+                                <rect key="frame" x="0.0" y="72" width="320" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="449508434.42282403">
+                                    <!--2015-03-31 15:27:14 +0000-->
+                                </date>
+                            </datePicker>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RvL-Db-8Bc">
+                                <rect key="frame" x="0.0" y="277" width="320" height="291"/>
+                                <connections>
+                                    <segue destination="KwR-MM-LUF" kind="embed" id="GLr-st-YsT"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="kkh-wn-Ao0">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="253"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wr8-N0-caI">
-                                    <rect key="frame" x="0.0" y="33" width="320" height="162"/>
-                                    <date key="date" timeIntervalSinceReferenceDate="449507215.892726">
-                                        <!--2015-03-31 15:06:55 +0000-->
-                                    </date>
-                                </datePicker>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
+                        <constraints>
+                            <constraint firstItem="RvL-Db-8Bc" firstAttribute="top" secondItem="Z5G-FA-N1C" secondAttribute="bottom" constant="43" id="SEs-yF-THE"/>
+                            <constraint firstItem="Osn-QN-Yvz" firstAttribute="top" secondItem="RvL-Db-8Bc" secondAttribute="bottom" id="hoi-x0-A7u"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CMN-vu-FKA"/>
+                    <connections>
+                        <outlet property="tableView" destination="RvL-Db-8Bc" id="uHQ-cc-dae"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2RQ-BK-OJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1221" y="406"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="T3M-be-egh">
+            <objects>
+                <tableViewController id="KwR-MM-LUF" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vgS-wA-kGc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="291"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="dyZ-Rs-gHq">
                                 <cells>
@@ -121,7 +148,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cBU-xw-GFu" kind="push" id="QaH-uH-r5F"/>
+                                            <segue destination="cBU-xw-GFu" kind="push" id="8J5-Ax-4gl"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="euC-Y2-6ke" style="IBUITableViewCellStyleDefault" id="jv9-38-enu">
@@ -144,6 +171,28 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="deB-Wn-Lvn">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="deB-Wn-Lvn" id="ynN-AI-4yx">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="wmt-zV-hBO" style="IBUITableViewCellStyleDefault" id="Tx7-g3-E0q">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tx7-g3-E0q" id="1PO-1l-r8c">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wmt-zV-hBO">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -156,14 +205,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Df-cm-8OE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1232" y="411"/>
+            <point key="canvasLocation" x="1221" y="1177"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="vRC-Wq-HZ5">
             <objects>
                 <tableViewController id="cBU-xw-GFu" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hDA-VE-RSv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="291"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -183,7 +232,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kSz-vp-8Om" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1733" y="406"/>
+            <point key="canvasLocation" x="1695" y="1177"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Llw-yU-djf">
@@ -210,6 +259,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1S2-sI-u5r"/>
+        <segue reference="V7v-BE-D9v"/>
     </inferredMetricsTieBreakers>
 </document>
