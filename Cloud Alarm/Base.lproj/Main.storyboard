@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="am2-Yu-iWn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="am2-Yu-iWn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Alarms-->
@@ -16,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="A1C-W9-3eJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="A1C-W9-3eJ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -67,6 +68,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7M5-xH-GF2" firstAttribute="top" secondItem="A1C-W9-3eJ" secondAttribute="bottom" id="2MN-7V-Bwj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="A1C-W9-3eJ" secondAttribute="trailing" constant="-16" id="ATx-Hk-FGp"/>
+                            <constraint firstItem="A1C-W9-3eJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="Ij3-Jl-xeA"/>
+                            <constraint firstItem="A1C-W9-3eJ" firstAttribute="top" secondItem="o94-l7-Bwo" secondAttribute="bottom" constant="-64" id="xVR-65-2IL"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Alarms" id="E1I-Yx-FXf">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="d4u-5r-49m">
@@ -83,7 +90,7 @@
             </objects>
             <point key="canvasLocation" x="694" y="406"/>
         </scene>
-        <!--Alarm detail-->
+        <!--Alarm Add Edit View Controller-->
         <scene sceneID="yTg-Jm-KX0">
             <objects>
                 <viewController id="Zrh-0E-Oyn" customClass="AlarmAddEditViewController" customModule="Cloud_Alarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -95,14 +102,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Z5G-FA-N1C">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Z5G-FA-N1C">
                                 <rect key="frame" x="0.0" y="72" width="320" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="449508434.42282403">
                                     <!--2015-03-31 15:27:14 +0000-->
                                 </date>
                             </datePicker>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RvL-Db-8Bc">
-                                <rect key="frame" x="0.0" y="277" width="320" height="291"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RvL-Db-8Bc">
+                                <rect key="frame" x="0.0" y="277" width="320" height="244"/>
                                 <connections>
                                     <segue destination="KwR-MM-LUF" kind="embed" id="GLr-st-YsT"/>
                                 </connections>
@@ -110,8 +117,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Z5G-FA-N1C" firstAttribute="top" secondItem="8SP-OF-OHP" secondAttribute="bottom" constant="8" id="6NG-5f-M9o"/>
+                            <constraint firstItem="Osn-QN-Yvz" firstAttribute="top" secondItem="RvL-Db-8Bc" secondAttribute="bottom" constant="47" id="OFG-oM-iGo"/>
                             <constraint firstItem="RvL-Db-8Bc" firstAttribute="top" secondItem="Z5G-FA-N1C" secondAttribute="bottom" constant="43" id="SEs-yF-THE"/>
-                            <constraint firstItem="Osn-QN-Yvz" firstAttribute="top" secondItem="RvL-Db-8Bc" secondAttribute="bottom" id="hoi-x0-A7u"/>
+                            <constraint firstItem="RvL-Db-8Bc" firstAttribute="leading" secondItem="kiB-jc-HB6" secondAttribute="leadingMargin" constant="-16" id="ScZ-Tf-alK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Z5G-FA-N1C" secondAttribute="trailing" constant="-16" id="dI5-kl-djD"/>
+                            <constraint firstItem="Z5G-FA-N1C" firstAttribute="leading" secondItem="kiB-jc-HB6" secondAttribute="leadingMargin" constant="-16" id="gd8-aS-nDo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RvL-Db-8Bc" secondAttribute="trailing" constant="-16" id="ody-Tv-hNu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CMN-vu-FKA"/>
@@ -128,7 +140,7 @@
             <objects>
                 <tableViewController id="KwR-MM-LUF" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vgS-wA-kGc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="291"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="244"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -207,16 +219,16 @@
             </objects>
             <point key="canvasLocation" x="1221" y="1177"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Alarm detail-->
         <scene sceneID="vRC-Wq-HZ5">
             <objects>
                 <tableViewController id="cBU-xw-GFu" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hDA-VE-RSv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="291"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="244"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jiE-5u-lV8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Days" id="jiE-5u-lV8">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jiE-5u-lV8" id="AjH-qO-wcX">
                                     <autoresizingMask key="autoresizingMask"/>
