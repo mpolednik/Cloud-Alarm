@@ -10,32 +10,18 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
-class AlarmAddEditViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class AlarmAddEditViewController: UITableViewController {
     
     var alarm: Alarm? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AlarmCell", forIndexPath: indexPath) as UITableViewCell
-        
-        switch (indexPath.row) {
-        case 0:
-            cell.textLabel!.text = alarm!.title
-        case 1:
-            cell.textLabel!.text = alarm!.enabled!.description
-        default:
-            break
+        if let alarm = alarm {
+            println("edit")
+        } else {
+            println("add")
         }
-        
-        return cell
     }
     
     override func didReceiveMemoryWarning() {
