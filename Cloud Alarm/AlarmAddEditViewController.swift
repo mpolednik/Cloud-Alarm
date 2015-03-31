@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
-class AlarmViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class AlarmAddEditViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
     
     var alarm: Alarm? = nil
     

@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
-class AlarmsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AlarmListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var alarms: AlarmContainer? = nil
@@ -33,7 +33,7 @@ class AlarmsViewController: UIViewController, UITableViewDataSource, UITableView
         if segue.identifier == "showAlarmDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let object = self.alarms!.alarms![indexPath.row]
-                (segue.destinationViewController as AlarmViewController).alarm = object
+                (segue.destinationViewController as AlarmAddEditViewController).alarm = object
             }
         }
     }
@@ -45,10 +45,23 @@ class AlarmsViewController: UIViewController, UITableViewDataSource, UITableView
             return 0
         }
     }
+
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            self.alarms!.alarms?.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
+        }
+    }
+
    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
       //  let cell = tableView.dequeueReusableCellWithIdentifier("AlarmCell", forIndexPath: indexPath) as UITableViewCell
        // cell.textLabel!.text = self.alarms!.alarms![indexPath.row].title
-        let cell: AlarmsTableViewCell = tableView.dequeueReusableCellWithIdentifier("AlarmCell",  forIndexPath: indexPath) as AlarmsTableViewCell
+        let cell: AlarmTableViewCell = tableView.dequeueReusableCellWithIdentifier("AlarmCell",  forIndexPath: indexPath) as AlarmTableViewCell
         cell.setCell(self.alarms!.alarms![indexPath.row].title!,hours: String(self.alarms!.alarms![indexPath.row].hour!),minutes: String(self.alarms!.alarms![indexPath.row].minute!))
         return cell
     }

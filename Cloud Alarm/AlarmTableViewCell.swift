@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlarmsTableViewCell: UITableViewCell {
+class AlarmTableViewCell: UITableViewCell {
     
     
     
