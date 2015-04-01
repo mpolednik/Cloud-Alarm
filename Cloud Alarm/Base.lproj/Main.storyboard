@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="am2-Yu-iWn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="am2-Yu-iWn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -129,6 +129,8 @@
                     <navigationItem key="navigationItem" id="CMN-vu-FKA"/>
                     <connections>
                         <outlet property="tableView" destination="RvL-Db-8Bc" id="uHQ-cc-dae"/>
+                        <outlet property="timepicker" destination="Z5G-FA-N1C" id="D9K-yI-hF8"/>
+                        <segue destination="cBU-xw-GFu" kind="push" identifier="_unused" id="Cuw-N2-0Z2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2RQ-BK-OJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -217,34 +219,38 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Df-cm-8OE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1221" y="1177"/>
+            <point key="canvasLocation" x="1221" y="1174"/>
         </scene>
         <!--Alarm detail-->
         <scene sceneID="vRC-Wq-HZ5">
             <objects>
-                <tableViewController id="cBU-xw-GFu" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hDA-VE-RSv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="244"/>
+                <tableViewController id="cBU-xw-GFu" customClass="RepeatPickerViewController" customModule="Cloud_Alarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hDA-VE-RSv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Days" id="jiE-5u-lV8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepeatCell" id="Ipd-xs-Lfr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jiE-5u-lV8" id="AjH-qO-wcX">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ipd-xs-Lfr" id="PdW-62-g46">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="cBU-xw-GFu" id="Ean-xz-QD9"/>
                             <outlet property="delegate" destination="cBU-xw-GFu" id="lmg-X0-rCz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Alarm detail" id="OIN-vm-qpB"/>
+                    <navigationItem key="navigationItem" title="Alarm detail" id="OIN-vm-qpB">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="xgo-Yf-Uqm"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kSz-vp-8Om" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1695" y="1177"/>
+            <point key="canvasLocation" x="1783" y="406"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Llw-yU-djf">
@@ -272,5 +278,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="V7v-BE-D9v"/>
+        <segue reference="Cuw-N2-0Z2"/>
     </inferredMetricsTieBreakers>
 </document>
