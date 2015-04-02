@@ -77,13 +77,66 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     var count = self.alarms![indexPath.row].days!.count
     
-    if (count == 2 )
-    {
-        println(self.alarms![indexPath.row].days![0])
-        if (self.alarms![indexPath.row].days![0] == 5 && self.alarms![indexPath.row].days![1] == 6) {
-            daysLabelText = "weekend only"
+    var daysArray = self.alarms![indexPath.row].days! as Array
+    if count > 0 {
+        
+        var lowestValue = daysArray[0]
+        
+        for  element in 0...count-1 {
+            if daysArray[element] == 0 {
+                daysLabelText += "Mon "
+            }
+            
+            if daysArray[element] == 1 {
+                daysLabelText += "Tue "
+            }
+            
+            if daysArray[element] == 2 {
+                daysLabelText += "Wed "
+            }
+            
+            if daysArray[element] == 3 {
+                daysLabelText += "Thu "
+            }
+            if daysArray[element] == 4 {
+                daysLabelText += "Fri "
+            }
+            
+            if daysArray[element] == 5 {
+                daysLabelText += "Sat "
+            }
+            
+            if daysArray[element] == 6 {
+                daysLabelText += "Sun"
+            }
         }
     }
+    
+    if count == 2
+    {
+        //println(self.alarms![indexPath.row].days![0])
+        if (daysArray[0] == 5 && daysArray[1] == 6) {
+            daysLabelText = "Weekends"
+        }
+    }
+    
+    if count == 5
+    {
+        //println(self.alarms![indexPath.row].days![0])
+        if (daysArray[0] == 0 && daysArray[1] == 1 && daysArray[2] == 2 && daysArray[3] == 3 && daysArray[4] == 4 && daysArray[5] == 5) {
+            daysLabelText = "Work days"
+        }
+    }
+    
+    if count == 7
+    {
+        daysLabelText = "Every day"
+    }
+    
+    if daysLabelText == "" {
+        daysLabelText = "No repeat"
+    }
+
     
     
     

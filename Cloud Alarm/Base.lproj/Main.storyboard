@@ -97,7 +97,7 @@
             </objects>
             <point key="canvasLocation" x="694" y="405"/>
         </scene>
-        <!--Alarm Add Edit View Controller-->
+        <!--Settings-->
         <scene sceneID="yTg-Jm-KX0">
             <objects>
                 <viewController id="Zrh-0E-Oyn" customClass="AlarmAddEditViewController" customModule="Cloud_Alarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -136,8 +136,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="RvL-Db-8Bc" secondAttribute="trailing" constant="-16" id="ody-Tv-hNu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="CMN-vu-FKA">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="iXW-Gr-oca">
+                    <navigationItem key="navigationItem" title="Settings" id="CMN-vu-FKA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="iXW-Gr-oca">
                             <connections>
                                 <segue destination="oLb-a7-ydo" kind="unwind" unwindAction="unwindAddEdit:" id="LhR-Hc-0RI"/>
                             </connections>
