@@ -107,6 +107,9 @@
                                 <date key="date" timeIntervalSinceReferenceDate="449508434.42282403">
                                     <!--2015-03-31 15:27:14 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="timepickerValueChanged:" destination="Zrh-0E-Oyn" eventType="valueChanged" id="9En-y8-o6Z"/>
+                                </connections>
                             </datePicker>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RvL-Db-8Bc">
                                 <rect key="frame" x="0.0" y="277" width="320" height="244"/>
@@ -126,12 +129,19 @@
                             <constraint firstAttribute="trailingMargin" secondItem="RvL-Db-8Bc" secondAttribute="trailing" constant="-16" id="ody-Tv-hNu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="CMN-vu-FKA"/>
+                    <navigationItem key="navigationItem" id="CMN-vu-FKA">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="iXW-Gr-oca">
+                            <connections>
+                                <segue destination="oLb-a7-ydo" kind="unwind" unwindAction="unwindAddEdit:" id="KNy-r9-fA1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="timepicker" destination="Z5G-FA-N1C" id="D9K-yI-hF8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2RQ-BK-OJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="oLb-a7-ydo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1221" y="406"/>
         </scene>

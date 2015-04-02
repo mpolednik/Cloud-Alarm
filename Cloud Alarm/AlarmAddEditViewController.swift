@@ -32,6 +32,17 @@ class AlarmAddEditViewController: UIViewController {
         self.selectedDays = source.selectedDays
     }
     
+    @IBAction func timepickerValueChanged(sender: AnyObject) {
+        let time = timepicker.date
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timepicker.date)
+        
+        if let alarm = self.alarm {
+            alarm.minute = components.minute
+            alarm.hour = components.hour
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "embededAlarmMenu" {
             let destination: AlarmAddEditTableViewController = segue.destinationViewController as AlarmAddEditTableViewController
@@ -44,7 +55,6 @@ class AlarmAddEditViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.tableViewController = childViewControllers[0] as? AlarmAddEditTableViewController
-        
         if let alarm = self.alarm {
             // How do we set the timepicker hour and minute? Since constructing a NSDate object is quite difficult,
             // we can simply use current NSDate, create calendar based on that date and initiate it's components.

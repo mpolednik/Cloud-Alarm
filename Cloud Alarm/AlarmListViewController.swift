@@ -13,7 +13,12 @@ import ObjectMapper
 class AlarmListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
     var alarms: AlarmContainer? = nil
+    
+    @IBAction func unwindAddEdit(segue: UIStoryboardSegue) {
+        self.tableView.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

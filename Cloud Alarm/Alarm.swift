@@ -18,7 +18,7 @@ class Alarm: Mappable {
     var repeat: Bool?
     var days: [Int]?
     
-    required init(_ map: Map) {
+    required init?(_ map: Map) {
         mapping(map)
     }
     
