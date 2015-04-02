@@ -14,22 +14,18 @@ class AlarmAddEditViewController: UIViewController {
     
     @IBOutlet weak var timepicker: UIDatePicker!
     
-    var alarm: Alarm? = nil
-    var tableViewController: AlarmAddEditTableViewController?
-    var selectedDays: [Int] = [] {
+    var alarm: Alarm? {
         didSet {
-            if let tvc = tableViewController {
-                tvc.selectedDays = selectedDays
-            }
-            if let alarm = alarm {
-                alarm.days = selectedDays
+            if let tlc = self.tableViewController {
+                tlc.alarm = self.alarm
             }
         }
     }
+    var tableViewController: AlarmAddEditTableViewController?
     
     @IBAction func unwindRepeat(segue: UIStoryboardSegue) {
         let source: RepeatPickerViewController = segue.sourceViewController as RepeatPickerViewController
-        self.selectedDays = source.selectedDays
+        self.alarm = source.shadowAlarm
     }
     
     @IBAction func timepickerValueChanged(sender: AnyObject) {
@@ -46,7 +42,7 @@ class AlarmAddEditViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "embededAlarmMenu" {
             let destination: AlarmAddEditTableViewController = segue.destinationViewController as AlarmAddEditTableViewController
-            destination.selectedDays = self.selectedDays
+            destination.alarm = self.alarm
         }
     }
     
@@ -66,10 +62,6 @@ class AlarmAddEditViewController: UIViewController {
             
             if let date = calendar.dateFromComponents(components) {
                 self.timepicker.setDate(date, animated: true)
-            }
-            
-            if let days = alarm.days {
-                self.selectedDays = days
             }
         }
     }

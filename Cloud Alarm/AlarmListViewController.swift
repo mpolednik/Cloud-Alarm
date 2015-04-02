@@ -14,9 +14,12 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     
-    var alarms: AlarmContainer? = nil
+    var alarms: AlarmContainer?
+    var currentIndexPath: NSIndexPath?
     
     @IBAction func unwindAddEdit(segue: UIStoryboardSegue) {
+        let source: AlarmAddEditViewController = segue.sourceViewController as AlarmAddEditViewController
+        self.alarms![self.currentIndexPath!.row] = source.alarm!
         self.tableView.reloadData()
     }
 
@@ -37,7 +40,9 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showEditAlarm" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let alarm = self.alarms!.alarms![indexPath.row]
+                self.currentIndexPath = indexPath
+                
+                let alarm = self.alarms![indexPath.row]
                 let destination: AlarmAddEditViewController = segue.destinationViewController as AlarmAddEditViewController
                 destination.alarm = alarm
             }
@@ -46,7 +51,7 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let alarms = self.alarms {
-            return alarms.alarms!.count
+            return alarms.count
         } else {
             return 0
         }
@@ -59,7 +64,7 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            self.alarms!.alarms?.removeAtIndex(indexPath.row)
+            self.alarms!.remove(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
         }
     }
@@ -68,7 +73,7 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
       //  let cell = tableView.dequeueReusableCellWithIdentifier("AlarmCell", forIndexPath: indexPath) as UITableViewCell
        // cell.textLabel!.text = self.alarms!.alarms![indexPath.row].title
         let cell: AlarmTableViewCell = tableView.dequeueReusableCellWithIdentifier("AlarmCell",  forIndexPath: indexPath) as AlarmTableViewCell
-        cell.setCell(self.alarms!.alarms![indexPath.row].title!,hours: String(self.alarms!.alarms![indexPath.row].hour!),minutes: String(self.alarms!.alarms![indexPath.row].minute!))
+        cell.setCell(self.alarms![indexPath.row].title!,hours: String(self.alarms![indexPath.row].hour!),minutes: String(self.alarms![indexPath.row].minute!))
         return cell
     }
     

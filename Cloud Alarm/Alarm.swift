@@ -18,6 +18,21 @@ class Alarm: Mappable {
     var repeat: Bool?
     var days: [Int]?
     
+    init() {
+        
+    }
+    
+    init(copyFrom: Alarm) {
+        self.id = copyFrom.id
+        self.title = copyFrom.title
+        self.hour = copyFrom.hour
+        self.minute = copyFrom.minute
+        self.enabled = copyFrom.enabled
+        self.repeat = copyFrom.repeat
+        self.days = copyFrom.days
+        
+    }
+    
     required init?(_ map: Map) {
         mapping(map)
     }

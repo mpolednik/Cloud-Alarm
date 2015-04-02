@@ -132,7 +132,7 @@
                     <navigationItem key="navigationItem" id="CMN-vu-FKA">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="iXW-Gr-oca">
                             <connections>
-                                <segue destination="oLb-a7-ydo" kind="unwind" unwindAction="unwindAddEdit:" id="KNy-r9-fA1"/>
+                                <segue destination="oLb-a7-ydo" kind="unwind" unwindAction="unwindAddEdit:" id="LhR-Hc-0RI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -255,7 +255,7 @@
                     <navigationItem key="navigationItem" title="Alarm detail" id="OIN-vm-qpB">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="xgo-Yf-Uqm">
                             <connections>
-                                <segue destination="7e6-UW-CFj" kind="unwind" unwindAction="unwindRepeat:" id="IIX-I3-UKS"/>
+                                <segue destination="7e6-UW-CFj" kind="unwind" unwindAction="unwindRepeat:" id="COS-By-msk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

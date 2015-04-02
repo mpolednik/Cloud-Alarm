@@ -10,12 +10,12 @@ import UIKit
 
 class AlarmAddEditTableViewController: UITableViewController {
     
-    var selectedDays: [Int] = []
+    var alarm: Alarm?
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showRepeatPicker" {
             let destination: RepeatPickerViewController = segue.destinationViewController as RepeatPickerViewController
-            destination.selectedDays = self.selectedDays
+            destination.alarm = self.alarm
         }
     }
 }
