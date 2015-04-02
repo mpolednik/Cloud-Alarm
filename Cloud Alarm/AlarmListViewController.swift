@@ -73,7 +73,22 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
       //  let cell = tableView.dequeueReusableCellWithIdentifier("AlarmCell", forIndexPath: indexPath) as UITableViewCell
        // cell.textLabel!.text = self.alarms!.alarms![indexPath.row].title
         let cell: AlarmTableViewCell = tableView.dequeueReusableCellWithIdentifier("AlarmCell",  forIndexPath: indexPath) as AlarmTableViewCell
-        cell.setCell(self.alarms![indexPath.row].title!,hours: String(self.alarms![indexPath.row].hour!),minutes: String(self.alarms![indexPath.row].minute!))
+    var daysLabelText:String = ""
+    
+    var count = self.alarms![indexPath.row].days!.count
+    
+    if (count == 2 )
+    {
+        println(self.alarms![indexPath.row].days![0])
+        if (self.alarms![indexPath.row].days![0] == 5 && self.alarms![indexPath.row].days![1] == 6) {
+            daysLabelText = "weekend only"
+        }
+    }
+    
+    
+    
+    
+    cell.setCell(self.alarms![indexPath.row].title!,hours: String(self.alarms![indexPath.row].hour!),minutes: String(self.alarms![indexPath.row].minute!), days: daysLabelText)
         return cell
     }
     

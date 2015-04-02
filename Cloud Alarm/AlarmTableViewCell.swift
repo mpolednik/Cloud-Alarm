@@ -13,6 +13,7 @@ class AlarmTableViewCell: UITableViewCell {
     @IBOutlet weak var leftLabelText: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var minutesLabel: UILabel!
+    @IBOutlet weak var DaysLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -23,10 +24,11 @@ class AlarmTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setCell(leftLabelText: String, hours: String, minutes: String){
+    func setCell(leftLabelText: String, hours: String, minutes: String, days: String){
         self.leftLabelText.text = leftLabelText
         self.hoursLabel.text = hours
         self.minutesLabel.text = minutes
+        self.DaysLabel.text = days
         
     }
 }
