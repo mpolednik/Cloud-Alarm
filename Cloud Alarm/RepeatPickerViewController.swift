@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 FI MU. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class RepeatPickerViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {

@@ -7,7 +7,6 @@
 //  Copyright (c) 2015 FI MU. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 
 class Alarm: Mappable {

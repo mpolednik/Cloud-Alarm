@@ -12,6 +12,8 @@ import ObjectMapper
 
 class AlarmAddEditViewController: UIViewController {
     
+    @IBOutlet weak var timepicker: UIDatePicker!
+    
     var alarm: Alarm? = nil
     var tableViewController: AlarmAddEditTableViewController?
     var selectedDays: [Int] = [] {
@@ -19,8 +21,6 @@ class AlarmAddEditViewController: UIViewController {
             tableViewController!.selectedDays = selectedDays
         }
     }
-    
-    @IBOutlet weak var timepicker: UIDatePicker!
     
     @IBAction func unwindRepeat(segue: UIStoryboardSegue) {
         let controller: RepeatPickerViewController = segue.sourceViewController as RepeatPickerViewController
@@ -62,17 +62,5 @@ class AlarmAddEditViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-}
-
-class AlarmAddEditTableViewController: UITableViewController {
-    
-    var selectedDays: [Int] = []
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showRepeatPicker" {
-            let destination: RepeatPickerViewController = segue.destinationViewController as RepeatPickerViewController
-            destination.selectedDays = self.selectedDays
-        }
     }
 }

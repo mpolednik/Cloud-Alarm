@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 FI MU. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 
 class AlarmContainer: Mappable {
+    
     var alarms: [Alarm]?
     
     required init(_ map: Map) {

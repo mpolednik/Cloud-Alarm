@@ -10,8 +10,6 @@ import UIKit
 
 class AlarmTableViewCell: UITableViewCell {
     
-    
-    
     @IBOutlet weak var leftLabelText: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
     @IBOutlet weak var minutesLabel: UILabel!
