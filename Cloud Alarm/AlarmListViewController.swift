@@ -32,8 +32,9 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showEditAlarm" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let object = self.alarms!.alarms![indexPath.row]
-                (segue.destinationViewController as AlarmAddEditViewController).alarm = object
+                let alarm = self.alarms!.alarms![indexPath.row]
+                let destination: AlarmAddEditViewController = segue.destinationViewController as AlarmAddEditViewController
+                destination.alarm = alarm
             }
         }
     }

@@ -18,13 +18,18 @@ class AlarmAddEditViewController: UIViewController {
     var tableViewController: AlarmAddEditTableViewController?
     var selectedDays: [Int] = [] {
         didSet {
-            tableViewController!.selectedDays = selectedDays
+            if let tvc = tableViewController {
+                tvc.selectedDays = selectedDays
+            }
+            if let alarm = alarm {
+                alarm.days = selectedDays
+            }
         }
     }
     
     @IBAction func unwindRepeat(segue: UIStoryboardSegue) {
-        let controller: RepeatPickerViewController = segue.sourceViewController as RepeatPickerViewController
-        self.selectedDays = controller.selectedDays
+        let source: RepeatPickerViewController = segue.sourceViewController as RepeatPickerViewController
+        self.selectedDays = source.selectedDays
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -40,21 +45,21 @@ class AlarmAddEditViewController: UIViewController {
         
         self.tableViewController = childViewControllers[0] as? AlarmAddEditTableViewController
         
-        if let alarm = alarm {
+        if let alarm = self.alarm {
             // How do we set the timepicker hour and minute? Since constructing a NSDate object is quite difficult,
             // we can simply use current NSDate, create calendar based on that date and initiate it's components.
             // Having these, we can simply set relevant values and call dateFromComponents to actually setup the timepicker.
-            let date = NSDate()
             let calendar = NSCalendar.currentCalendar()
-            let components = calendar.components(nil, fromDate: date)
+            let components = calendar.components(nil, fromDate: NSDate())
             components.hour = alarm.hour!
             components.minute = alarm.minute!
-            if let newDate = calendar.dateFromComponents(components) {
-                self.timepicker.setDate(newDate, animated: true)
+            
+            if let date = calendar.dateFromComponents(components) {
+                self.timepicker.setDate(date, animated: true)
             }
             
-            if let repeat = alarm.days {
-                self.selectedDays = repeat
+            if let days = alarm.days {
+                self.selectedDays = days
             }
         }
     }
