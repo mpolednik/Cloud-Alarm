@@ -80,8 +80,6 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     var daysArray = self.alarms![indexPath.row].days! as Array
     if count > 0 {
         
-        var lowestValue = daysArray[0]
-        
         for  element in 0...count-1 {
             if daysArray[element] == 0 {
                 daysLabelText += "Mon "
@@ -114,7 +112,6 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     if count == 2
     {
-        //println(self.alarms![indexPath.row].days![0])
         if (daysArray[0] == 5 && daysArray[1] == 6) {
             daysLabelText = "Weekends"
         }
@@ -122,7 +119,6 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     if count == 5
     {
-        //println(self.alarms![indexPath.row].days![0])
         if (daysArray[0] == 0 && daysArray[1] == 1 && daysArray[2] == 2 && daysArray[3] == 3 && daysArray[4] == 4 && daysArray[5] == 5) {
             daysLabelText = "Work days"
         }

@@ -11,9 +11,8 @@ import UIKit
 class AlarmTableViewCell: UITableViewCell {
     
     @IBOutlet weak var leftLabelText: UILabel!
-    @IBOutlet weak var hoursLabel: UILabel!
-    @IBOutlet weak var minutesLabel: UILabel!
-    @IBOutlet weak var DaysLabel: UILabel!
+    @IBOutlet weak var daysLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -26,9 +25,8 @@ class AlarmTableViewCell: UITableViewCell {
     
     func setCell(leftLabelText: String, hours: String, minutes: String, days: String){
         self.leftLabelText.text = leftLabelText
-        self.hoursLabel.text = hours
-        self.minutesLabel.text = minutes
-        self.DaysLabel.text = days
+        self.timeLabel.text = hours + " : " + minutes
+        self.daysLabel.text = days
         
     }
 }
