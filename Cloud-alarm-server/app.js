@@ -14,6 +14,7 @@ var bodyParser = require('body-parser');
 var alarmController = require('./controllers/AlarmController');
 var userController = require('./controllers/UserController');
 var authController = require('./controllers/AuthController');
+var oauthController = require('./controllers/OauthController');
 
 var db = require('./db/MongoDbClient'); // open db connection
 var app = express();
@@ -30,14 +31,16 @@ var router = express.Router();
 
 // Create endpoint handlers for /alarms
 router.route('/alarms')
-    .post(authController.isAuthenticated, alarmController.postAlarm)
-    .get(authController.isAuthenticated, alarmController.getAlarms);
+    .all(oauthController.oauthCheck)
+    .post(alarmController.postAlarm)
+    .get(alarmController.getAlarms);
 
 // Create endpoint handlers for /beers/:id
 router.route('/alarms/:id')
-    .get(authController.isAuthenticated, alarmController.getAlarm)
-    .put(authController.isAuthenticated, alarmController.putAlarm)
-    .delete(authController.isAuthenticated, alarmController.deleteAlarm);
+    .all(oauthController.oauthCheck)
+    .get(alarmController.getAlarm)
+    .put(alarmController.putAlarm)
+    .delete(alarmController.deleteAlarm);
 
 // Create endpoint handlers for /users
 router.route('/users')
