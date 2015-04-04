@@ -8,11 +8,14 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var passport = require('passport');
 var bodyParser = require('body-parser');
 
-var db = require('./db/MongoDbClient'); // open db connection
 var alarmController = require('./controllers/AlarmController');
+var userController = require('./controllers/UserController');
+var authController = require('./controllers/AuthController');
 
+var db = require('./db/MongoDbClient'); // open db connection
 var app = express();
 
 
@@ -20,20 +23,27 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
 
 // Create our Express router
 var router = express.Router();
 
 // Create endpoint handlers for /alarms
 router.route('/alarms')
-    .post(alarmController.postAlarm)
-    .get(alarmController.getAlarms);
+    .post(authController.isAuthenticated, alarmController.postAlarm)
+    .get(authController.isAuthenticated, alarmController.getAlarms);
 
 // Create endpoint handlers for /beers/:id
 router.route('/alarms/:id')
-    .get(alarmController.getAlarm)
-    .put(alarmController.putAlarm)
-    .delete(alarmController.deleteAlarm);
+    .get(authController.isAuthenticated, alarmController.getAlarm)
+    .put(authController.isAuthenticated, alarmController.putAlarm)
+    .delete(authController.isAuthenticated, alarmController.deleteAlarm);
+
+// Create endpoint handlers for /users
+router.route('/users')
+    .post(userController.postUser)
+    .get(authController.isAuthenticated, userController.getUsers);
+
 
 // Register all our routes with /api
 app.use('/api', router);

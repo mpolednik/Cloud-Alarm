@@ -8,7 +8,7 @@ var Alarm = require('../models/AlarmModel');
  * Create endpoint /api/alarms for GET
  */
 exports.getAlarms = function(req, res) {
-    Alarm.find({}, function(err,data) {
+    Alarm.find({ userId: req.user._id }, function(err,data) {  // password library makes user object in the request
         res.status(200).json(data);
     });
 };
@@ -28,6 +28,7 @@ exports.postAlarm = [function(req, res, next) {
         console.log(req.body);
 
         var alarm = createNewAlarm(req.body);
+        alarm.userId = req.user._id; // password library makes user object in the request
 
         alarm.save(function(err) {
             if (err)
@@ -51,7 +52,7 @@ exports.getAlarm = [function(req, res, next) {
         }
     },
     function(req, res) {
-        Alarm.findById(req.params.id, function(err,data) {
+        Alarm.findOne({ userId: req.user._id, _id: req.params.id }, function(err,data) {
             if (err)
                 res.send(err);
             res.status(200).json(data);
@@ -63,11 +64,12 @@ exports.getAlarm = [function(req, res, next) {
  * Create endpoint /api/alarms/:id for PUT
  */
 exports.putAlarm = function(req, res) {
-    Alarm.findById(req.params.id, function(err, data) {
+    Alarm.findOne({ userId: req.user._id, _id: req.params.id }, function(err,data) {
         if (err)
             res.send(err);
 
         var alarm = copyValuesOfAlarm(data, req.body);
+        alarm.userId = req.user._id; // password library makes user object in the request
 
         alarm.save(function(err) {
             if (err)
@@ -89,7 +91,7 @@ exports.deleteAlarm = [function(req, res, next) {
         }
     },
     function(req, res) {
-        Alarm.findByIdAndRemove(req.params.id, function(err) {
+        Alarm.findOneAndRemove({ userId: req.user._id, _id: req.params.id }, function(err) {
             if (err)
                 res.send(err);
             res.status(200).json("Removed");
