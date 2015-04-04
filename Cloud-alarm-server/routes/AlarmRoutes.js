@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Alarm = require('../entities/AlarmModel');
+var Alarm = require('../models/AlarmModel');
 
 
 router.get('/', function(req, res) {
@@ -19,16 +19,15 @@ router.post('/', function(req, res, next) {
     },
     function(req, res) {
         console.log(req.body);
-        new Alarm({
-            _id: req.body.id,
-            title: req.body.title,
-            hour: req.body.header,
-            minute: req.body.minute,
-            enabled: req.body.enabled,
-            repeat: req.body.repeat,
-            days: req.body.days
-        }).save();
-        res.status(201).send("created");
+
+        var alarm = createNewAlarm(req.body);
+
+        alarm.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.status(201).json({ message: 'Alarm added to the dtb!', data: alarm });
+        });
     }
 );
 
@@ -40,12 +39,29 @@ router.get('/:id', function(req, res, next) { // example http://localhost:3000/a
         }
     },
     function(req, res) {
-        var id = req.params.id;
-        Alarm.find({ _id : id}, function(err,data) {
+        Alarm.findById(req.params.id, function(err,data) {
+            if (err)
+                res.send(err);
             res.status(200).json(data);
         });
     }
 );
+
+router.put("/:id", function(req, res) {
+    Alarm.findById(req.params.id, function(err, data) {
+        if (err)
+            res.send(err);
+
+        var alarm = copyValuesOfAlarm(data, req.body);
+
+        alarm.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.status(200).json(data);
+        });
+    });
+});
 
 router.delete('/:id', function(req, res, next) { // example http://localhost:3000/alarms/1
         if (req.params.id === undefined) {
@@ -56,10 +72,36 @@ router.delete('/:id', function(req, res, next) { // example http://localhost:300
     },
     function(req, res) {
         var id = req.params.id;
-        Alarm.findOneAndRemove({ _id : id}, function() {
+        Alarm.findOneAndRemove({ _id : id}, function(err) {
+            if (err)
+                res.send(err);
             res.status(200).send("Removed");
         });
     }
 );
+
+function createNewAlarm(requestBody) {
+    var alarm = new Alarm();
+    alarm._id = requestBody.id;
+    alarm.title = requestBody.title;
+    alarm.hour = requestBody.hour;
+    alarm.minute = requestBody.minute;
+    alarm.enabled = requestBody.enabled;
+    alarm.repeat = requestBody.repeat;
+    alarm.days = requestBody.days;
+    return alarm;
+};
+
+function copyValuesOfAlarm(alarmTo, alarmFrom) {
+    var alarm = new Alarm();
+    alarmTo.title = alarmFrom.title;
+    alarmTo.hour = alarmFrom.hour;
+    alarmTo.minute = alarmFrom.minute;
+    alarmTo.enabled = alarmFrom.enabled;
+    alarmTo.repeat = alarmFrom.repeat;
+    alarmTo.days = alarmFrom.days;
+    return alarmTo;
+};
+
 
 module.exports = router;

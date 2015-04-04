@@ -1,3 +1,8 @@
+/**
+ * developed with using many tutorials. One of them is
+ * tutorial: http://scottksmith.com/blog/2014/05/02/building-restful-apis-with-node/
+ */
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
