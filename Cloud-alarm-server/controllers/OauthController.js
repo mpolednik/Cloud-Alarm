@@ -16,7 +16,7 @@ exports.oauthCheck = function(req, res, next) {
             if (err) { res.send(err); }
 
             // No token found
-            if (!token) { res.status(400).json("No token found"); }
+            if (!token) { return res.status(400).json("No token found"); }
 
             req.userId = token.userId;
             next();

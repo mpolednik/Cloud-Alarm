@@ -11,6 +11,8 @@ var Alarm = require('../models/AlarmModel');
 exports.getAlarms = function(req, res) {
     console.log(req.userId);
     Alarm.find({ userId: req.userId }, function(err,data) {  // password library makes user object in the request
+        if (err)
+            return res.send(err);
         res.status(200).json(data);
     });
 };
@@ -21,7 +23,7 @@ exports.getAlarms = function(req, res) {
 exports.postAlarm = [function(req, res, next) {
         if(req.body.title === undefined) { // Better one validation than nothing
             console.log(req.body);
-            res.status(400).send("Title is missing");
+            return res.status(400).send("Title is missing");
         } else {
             next();
         }
@@ -34,7 +36,7 @@ exports.postAlarm = [function(req, res, next) {
 
         alarm.save(function(err) {
             if (err)
-                res.send(err);
+                return res.send(err);
 
             res.status(201).json({ message: 'Alarm added to the dtb!', data: alarm });
         });
@@ -48,7 +50,7 @@ exports.postAlarm = [function(req, res, next) {
  */
 exports.getAlarm = [function(req, res, next) {
         if (req.params.id === undefined) {
-            res.status(400).send("Id is undefined");
+            return res.status(400).send("Id is undefined");
         } else {
             next();
         }
@@ -56,7 +58,7 @@ exports.getAlarm = [function(req, res, next) {
     function(req, res) {
         Alarm.findOne({ userId: req.userId, _id: req.params.id }, function(err,data) {
             if (err)
-                res.send(err);
+                return res.send(err);
             res.status(200).json(data);
         });
     }
@@ -68,14 +70,14 @@ exports.getAlarm = [function(req, res, next) {
 exports.putAlarm = function(req, res) {
     Alarm.findOne({ userId: req.userId, _id: req.params.id }, function(err,data) {
         if (err)
-            res.send(err);
+            return res.send(err);
 
         var alarm = copyValuesOfAlarm(data, req.body);
         alarm.userId = req.userId; // password library makes user object in the request
 
         alarm.save(function(err) {
             if (err)
-                res.send(err);
+                return res.send(err);
 
             res.status(200).json(data);
         });
@@ -87,7 +89,7 @@ exports.putAlarm = function(req, res) {
  */
 exports.deleteAlarm = [function(req, res, next) {
         if (req.params.id === undefined) {
-            res.status(400).send("Id is undefined");
+            return res.status(400).send("Id is undefined");
         } else {
             next();
         }
@@ -95,7 +97,7 @@ exports.deleteAlarm = [function(req, res, next) {
     function(req, res) {
         Alarm.findOneAndRemove({ userId: req.userId, _id: req.params.id }, function(err) {
             if (err)
-                res.send(err);
+                return res.send(err);
             res.status(200).json("Removed");
         });
     }

@@ -16,7 +16,7 @@ exports.postUser = function(req, res) {
 
     user.save(function(err) {
         if (err)
-            res.send(err);
+            return res.send(err);
 
         // Create a new access token
         var token = new Token({
@@ -25,7 +25,7 @@ exports.postUser = function(req, res) {
         });
 
         token.save(function (err) {
-            if (err) { res.send(err); }
+            if (err) { return res.send(err); }
 
             res.status(201).json({ message: 'New user added!', body: token.value });
         });
@@ -39,11 +39,11 @@ exports.postUser = function(req, res) {
 exports.getUsers = function(req, res) {
     User.find(function(err, users) {
         if (err)
-            res.send(err);
+            return res.send(err);
 
         Token.find(function(err, tokens) {
             if (err)
-                res.send(err);
+                return res.send(err);
 
             res.status(200).json({ users: users, tokens: tokens });
         });
