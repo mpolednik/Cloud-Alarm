@@ -1,15 +1,22 @@
-var express = require('express');
-var router = express.Router();
+/**
+ * Created by tomasskopal on 04.04.15.
+ */
+
 var Alarm = require('../models/AlarmModel');
 
-
-router.get('/', function(req, res) {
+/**
+ * Create endpoint /api/alarms for GET
+ */
+exports.getAlarms = function(req, res) {
     Alarm.find({}, function(err,data) {
         res.status(200).json(data);
     });
-});
+};
 
-router.post('/', function(req, res, next) {
+/**
+ * Create endpoint /api/alarms for POST
+ */
+exports.postAlarm = [function(req, res, next) {
         if(req.body.title === undefined) { // Better one validation than nothing
             console.log(req.body);
             res.status(400).send("Title is missing");
@@ -29,9 +36,14 @@ router.post('/', function(req, res, next) {
             res.status(201).json({ message: 'Alarm added to the dtb!', data: alarm });
         });
     }
-);
+];
 
-router.get('/:id', function(req, res, next) { // example http://localhost:3000/alarms/1
+/**
+ * Create endpoint /api/alarms/:id for GET
+ *
+ * example http://localhost:3000/api/alarms/1
+ */
+exports.getAlarm = [function(req, res, next) {
         if (req.params.id === undefined) {
             res.status(400).send("Id is undefined");
         } else {
@@ -45,9 +57,12 @@ router.get('/:id', function(req, res, next) { // example http://localhost:3000/a
             res.status(200).json(data);
         });
     }
-);
+];
 
-router.put("/:id", function(req, res) {
+/**
+ * Create endpoint /api/alarms/:id for PUT
+ */
+exports.putAlarm = function(req, res) {
     Alarm.findById(req.params.id, function(err, data) {
         if (err)
             res.send(err);
@@ -61,9 +76,12 @@ router.put("/:id", function(req, res) {
             res.status(200).json(data);
         });
     });
-});
+};
 
-router.delete('/:id', function(req, res, next) { // example http://localhost:3000/alarms/1
+/**
+ * Create endpoint /api/alarms/:id for DELETE
+ */
+exports.deleteAlarm = [function(req, res, next) {
         if (req.params.id === undefined) {
             res.status(400).send("Id is undefined");
         } else {
@@ -71,14 +89,13 @@ router.delete('/:id', function(req, res, next) { // example http://localhost:300
         }
     },
     function(req, res) {
-        var id = req.params.id;
-        Alarm.findOneAndRemove({ _id : id}, function(err) {
+        Alarm.findByIdAndRemove(req.params.id, function(err) {
             if (err)
                 res.send(err);
-            res.status(200).send("Removed");
+            res.status(200).json("Removed");
         });
     }
-);
+];
 
 function createNewAlarm(requestBody) {
     var alarm = new Alarm();
@@ -93,7 +110,6 @@ function createNewAlarm(requestBody) {
 };
 
 function copyValuesOfAlarm(alarmTo, alarmFrom) {
-    var alarm = new Alarm();
     alarmTo.title = alarmFrom.title;
     alarmTo.hour = alarmFrom.hour;
     alarmTo.minute = alarmFrom.minute;
@@ -102,6 +118,3 @@ function copyValuesOfAlarm(alarmTo, alarmFrom) {
     alarmTo.days = alarmFrom.days;
     return alarmTo;
 };
-
-
-module.exports = router;

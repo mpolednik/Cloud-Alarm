@@ -11,21 +11,32 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var db = require('./db/MongoDbClient'); // open db connection
-var alarmRoutes = require('./routes/AlarmRoutes');
+var alarmController = require('./controllers/AlarmController');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/alarms', alarmRoutes);
+// Create our Express router
+var router = express.Router();
+
+// Create endpoint handlers for /alarms
+router.route('/alarms')
+    .post(alarmController.postAlarm)
+    .get(alarmController.getAlarms);
+
+// Create endpoint handlers for /beers/:id
+router.route('/alarms/:id')
+    .get(alarmController.getAlarm)
+    .put(alarmController.putAlarm)
+    .delete(alarmController.deleteAlarm);
+
+// Register all our routes with /api
+app.use('/api', router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
