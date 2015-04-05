@@ -29,23 +29,23 @@ app.use(passport.initialize());
 // Create our Express router
 var router = express.Router();
 
-// Create endpoint handlers for /alarms
 router.route('/alarms')
     .all(oauthController.oauthCheck)
     .post(alarmController.postAlarm)
     .get(alarmController.getAlarms);
 
-// Create endpoint handlers for /beers/:id
 router.route('/alarms/:id')
     .all(oauthController.oauthCheck)
     .get(alarmController.getAlarm)
     .put(alarmController.putAlarm)
     .delete(alarmController.deleteAlarm);
 
-// Create endpoint handlers for /users
 router.route('/users')
     .post(userController.postUser)
     .get(authController.isAuthenticated, userController.getUsers);
+
+router.route('/user')
+    .get(authController.isAuthenticated, userController.getUser);
 
 
 // Register all our routes with /api

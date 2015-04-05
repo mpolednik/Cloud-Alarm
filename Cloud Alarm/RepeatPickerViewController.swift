@@ -21,6 +21,10 @@ class RepeatPickerViewController: UITableViewController, UITableViewDataSource, 
             self.shadowAlarm = Alarm(copyFrom: alarm)
         }
         
+        if (shadowAlarm == nil) {
+            shadowAlarm = Alarm()
+        }
+        
         for day in self.shadowAlarm!.days! {
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: day, inSection: 0), animated: false, scrollPosition: .None)
         }

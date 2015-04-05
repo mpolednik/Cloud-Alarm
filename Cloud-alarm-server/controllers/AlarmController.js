@@ -10,10 +10,12 @@ var Alarm = require('../models/AlarmModel');
  */
 exports.getAlarms = function(req, res) {
     console.log(req.userId);
-    Alarm.find({ userId: req.userId }, function(err,data) {  // password library makes user object in the request
-        if (err)
+    Alarm.find({ userId: req.userId }, function(err,data) {
+        if (err) {
+            console.log("Error in finding users" + err);
             return res.send(err);
-        res.status(200).json(data);
+        }
+        res.status(200).json({ alarms: data });
     });
 };
 
@@ -29,10 +31,8 @@ exports.postAlarm = [function(req, res, next) {
         }
     },
     function(req, res) {
-        console.log(req.body);
-
         var alarm = createNewAlarm(req.body);
-        alarm.userId = req.userId; // password library makes user object in the request
+        alarm.userId = req.userId;
 
         alarm.save(function(err) {
             if (err)
@@ -59,7 +59,7 @@ exports.getAlarm = [function(req, res, next) {
         Alarm.findOne({ userId: req.userId, _id: req.params.id }, function(err,data) {
             if (err)
                 return res.send(err);
-            res.status(200).json(data);
+            res.status(200).json({ alarm: data });
         });
     }
 ];
@@ -79,7 +79,7 @@ exports.putAlarm = function(req, res) {
             if (err)
                 return res.send(err);
 
-            res.status(200).json(data);
+            res.status(200).json({ data: data });
         });
     });
 };

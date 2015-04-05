@@ -96,6 +96,7 @@
 		1F20046E1AB2D53C00D28B9A /* Cloud Alarm */ = {
 			isa = PBXGroup;
 			children = (
+				36BCB02A1AD16EEA00A533C5 /* Networking */,
 				1F2004711AB2D53C00D28B9A /* AppDelegate.swift */,
 				1FFC80FC1ABB08160002E38D /* Alarm.swift */,
 				1F2004731AB2D53C00D28B9A /* AlarmListViewController.swift */,
@@ -135,6 +136,13 @@
 				1F2004861AB2D53C00D28B9A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		36BCB02A1AD16EEA00A533C5 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		3B7B5DB724A56CD88481A6D8 /* Frameworks */ = {

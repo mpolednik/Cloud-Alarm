@@ -14,6 +14,9 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     
+    let BASE_URL: String = "http://localhost:3000/api"
+    let AUTHORIZATION: String = "admin:admin"
+    
     var alarms: AlarmContainer?
     var currentIndexPath: NSIndexPath?
     
@@ -27,14 +30,8 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let manager = Alamofire.Manager(configuration: nil)
-        manager.request(.GET, "http://private-06e74-cloudalarm.apiary-mock.com/alarms").responseJSON() {
-            (request, response, JSON , error) in
-            if let JSON: AnyObject = JSON {
-                self.alarms =  Mapper<AlarmContainer>().map(JSON as [String : AnyObject])
-                self.tableView.reloadData()
-            }
-        }
+        loadDataFromRealServer()
+//        loadDataFromMockServer()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -45,6 +42,47 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
                 let alarm = self.alarms![indexPath.row]
                 let destination: AlarmAddEditViewController = segue.destinationViewController as AlarmAddEditViewController
                 destination.alarm = alarm
+            }
+        }
+    }
+    
+    func loadDataFromMockServer() {
+        Alamofire.Manager.sharedInstance.request(.GET, "http://private-06e74-cloudalarm.apiary-mock.com/alarms").responseJSON() {
+            (request, response, JSON , error) in
+            if let JSON: AnyObject = JSON {
+                self.alarms =  Mapper<AlarmContainer>().map(JSON as [String : AnyObject])
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func loadDataFromRealServer() {
+        let plainData = AUTHORIZATION.dataUsingEncoding(NSUTF8StringEncoding)
+        let base64String = plainData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
+        
+        var headers = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
+        headers["Authorization"] = "Basic "+base64String
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = headers
+        
+        Alamofire
+            .Manager(configuration: configuration)
+            .request(.GET, BASE_URL+"/user")
+            .responseJSON() {
+                (request, response, JSON, error) in
+                if let JSON: AnyObject = JSON {
+                    let token : String = JSON["token"] as String
+                    Alamofire
+                        .Manager(configuration: nil)
+                        .request(.GET, self.BASE_URL+"/alarms", parameters: ["access_token":token])
+                        .responseJSON() {
+                            (request2, response2, JSON2, error2) in
+                            if let JSON2: AnyObject = JSON2 {
+                                self.alarms =  Mapper<AlarmContainer>().map(JSON2 as [String : AnyObject])
+                                self.tableView.reloadData()
+                            }
+                    }
             }
         }
     }
