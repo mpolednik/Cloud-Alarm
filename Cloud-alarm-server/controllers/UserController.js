@@ -27,7 +27,7 @@ exports.postUser = function(req, res) {
         token.save(function (err) {
             if (err) { return res.send(err); }
 
-            res.status(201).json({ message: 'New user added!', body: token.value });
+            res.status(201).json({ message: 'New user added!', access_token: token.value });
         });
     });
 };
@@ -46,6 +46,23 @@ exports.getUsers = function(req, res) {
                 return res.send(err);
 
             res.status(200).json({ users: users, tokens: tokens });
+        });
+    });
+};
+
+/**
+ * Create endpoint /api/user for GET
+ * Returns user with token
+ */
+exports.getUser = function(req, res) {
+    User.findOne({ _id: req.user._id }, function(err, user) { // req.user object is set by password library
+        if (err)
+            return res.send(err);
+        Token.findOne({ userId: req.user._id }, function(err, token) {
+            if (err)
+                return res.send(err);
+
+            res.status(200).json({ user: user.username, token: token.value });
         });
     });
 };

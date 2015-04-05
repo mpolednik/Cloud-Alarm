@@ -19,7 +19,7 @@ class Alarm: Mappable {
     var days: [Int]?
     
     init() {
-        
+        days = []
     }
     
     init(copyFrom: Alarm) {
