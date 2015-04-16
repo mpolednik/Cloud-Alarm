@@ -119,36 +119,13 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     var count = self.alarms![indexPath.row].days!.count
     
-    var daysArray = self.alarms![indexPath.row].days! as Array
+    let wdays: [Int: String] = [0: "Mon ", 1: "Tue ", 2: "Wed ", 3: "Thu ", 4: "Fri ", 5: "Sat ", 6: "Sun "]
+    
+    var daysArray = sorted(self.alarms![indexPath.row].days!, {(e1: Int, e2: Int) -> Bool in e1 < e2}) as Array
+    
     if count > 0 {
-        
         for  element in 0...count-1 {
-            if daysArray[element] == 0 {
-                daysLabelText += "Mon "
-            }
-            
-            if daysArray[element] == 1 {
-                daysLabelText += "Tue "
-            }
-            
-            if daysArray[element] == 2 {
-                daysLabelText += "Wed "
-            }
-            
-            if daysArray[element] == 3 {
-                daysLabelText += "Thu "
-            }
-            if daysArray[element] == 4 {
-                daysLabelText += "Fri "
-            }
-            
-            if daysArray[element] == 5 {
-                daysLabelText += "Sat "
-            }
-            
-            if daysArray[element] == 6 {
-                daysLabelText += "Sun "
-            }
+            daysLabelText += wdays[daysArray[element]]!
         }
     }
     
