@@ -37,4 +37,8 @@ class AlarmContainer: Mappable {
     func remove(index: Int) {
         self.alarms.removeAtIndex(index)
     }
+    
+    func append(alarm: Alarm) {
+        self.alarms.append(alarm);
+    }
 }

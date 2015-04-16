@@ -16,17 +16,13 @@ class AlarmAddEditViewController: UIViewController {
     
     var alarm: Alarm? {
         didSet {
-            if let tlc = self.tableViewController {
-                tlc.alarm = self.alarm
+            if let tvc = self.tableViewController {
+                tvc.alarm = self.alarm
             }
         }
     }
     var tableViewController: AlarmAddEditTableViewController?
-    
-    @IBAction func unwindRepeat(segue: UIStoryboardSegue) {
-        let source: RepeatPickerViewController = segue.sourceViewController as RepeatPickerViewController
-        self.alarm = source.shadowAlarm
-    }
+    var edit: Bool = true
     
     @IBAction func timepickerValueChanged(sender: AnyObject) {
         let time = timepicker.date
@@ -62,6 +58,18 @@ class AlarmAddEditViewController: UIViewController {
             
             if let date = calendar.dateFromComponents(components) {
                 self.timepicker.setDate(date, animated: true)
+            }
+        } else {
+            self.alarm = Alarm()
+            self.alarm!.title = "TEST"
+            self.edit = false
+            
+            let calendar = NSCalendar.currentCalendar()
+            let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: NSDate())
+            
+            if let date = calendar.dateFromComponents(components) {
+                self.alarm!.minute = components.minute
+                self.alarm!.hour = components.hour
             }
         }
     }

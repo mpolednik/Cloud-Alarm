@@ -22,7 +22,11 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
     
     @IBAction func unwindAddEdit(segue: UIStoryboardSegue) {
         let source: AlarmAddEditViewController = segue.sourceViewController as AlarmAddEditViewController
-        self.alarms![self.currentIndexPath!.row] = source.alarm!
+        if source.edit {
+            self.alarms![self.currentIndexPath!.row] = source.alarm!
+        } else {
+            self.alarms!.append(source.alarm!);
+        }
         self.tableView.reloadData()
     }
 
@@ -30,8 +34,8 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        loadDataFromRealServer()
-//        loadDataFromMockServer()
+//        loadDataFromRealServer()
+        loadDataFromMockServer()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -143,7 +147,7 @@ class AlarmListViewController: UIViewController, UITableViewDataSource, UITableV
             }
             
             if daysArray[element] == 6 {
-                daysLabelText += "Sun"
+                daysLabelText += "Sun "
             }
         }
     }

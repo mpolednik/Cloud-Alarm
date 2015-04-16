@@ -12,20 +12,11 @@ class RepeatPickerViewController: UITableViewController, UITableViewDataSource, 
     
     let days: [String] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     var alarm: Alarm?
-    var shadowAlarm: Alarm?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let alarm = self.alarm {
-            self.shadowAlarm = Alarm(copyFrom: alarm)
-        }
-        
-        if (shadowAlarm == nil) {
-            shadowAlarm = Alarm()
-        }
-        
-        for day in self.shadowAlarm!.days! {
+        for day in self.alarm!.days! {
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: day, inSection: 0), animated: false, scrollPosition: .None)
         }
     }
@@ -42,12 +33,12 @@ class RepeatPickerViewController: UITableViewController, UITableViewDataSource, 
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.shadowAlarm!.days!.append(indexPath.row)
+        self.alarm!.days!.append(indexPath.row)
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if let index = find(self.shadowAlarm!.days!, indexPath.row) {
-            self.shadowAlarm!.days!.removeAtIndex(index)
+        if let index = find(self.alarm!.days!, indexPath.row) {
+            self.alarm!.days!.removeAtIndex(index)
         }
     }
 }
